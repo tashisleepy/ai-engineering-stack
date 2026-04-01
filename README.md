@@ -1,76 +1,52 @@
 # AI Engineering Stack
 
-A multi-agent AI engineering system built for production. 7 specialized agents, 3 orchestrated workflows, and a complete model routing configuration — designed to ship enterprise-grade AI work across consulting, content, trading, and product development.
+A multi-agent AI system for content production. 4 specialized agents, orchestrated workflows, and smart model routing across 15+ AI tools — built for shipping production-grade creative work at scale.
 
-This isn't a framework. It's a working system deployed on real projects worth $10M+.
+Built on [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) (32-agent orchestration framework for Claude Code).
 
 ---
 
 ## Architecture
 
 ```
-                    ┌─────────────────────────────────┐
-                    │       ORCHESTRATION LAYER        │
-                    │   Claude Code + oh-my-claudecode │
-                    │      (32 engineering agents)     │
-                    └──────────┬──────────────────────┘
-                               │
-          ┌────────────────────┼────────────────────┐
-          │                    │                    │
-    ┌─────▼─────┐      ┌──────▼──────┐     ┌──────▼──────┐
-    │ CONSULTING │      │   CONTENT   │     │  PRODUCTION │
-    │   LANE     │      │    LANE     │     │    LANE     │
-    └─────┬─────┘      └──────┬──────┘     └──────┬──────┘
-          │                    │                    │
-  ┌───────┴───────┐   ┌───────┴───────┐   ┌───────┴───────┐
-  │ Forensic      │   │ Content       │   │ Video         │
-  │ Analyst       │   │ Strategist    │   │ Director      │
-  │               │   │               │   │               │
-  │ Pitch         │   │ Image         │   │ Music         │
-  │ Architect     │   │ Architect     │   │ Producer      │
-  └───────────────┘   └───────────────┘   └───────────────┘
-                              │
-                      ┌───────▼───────┐
-                      │   TRADING     │
-                      │    LANE       │
-                      ├───────────────┤
-                      │ Trading       │
-                      │ Analyst       │
-                      │ (IFVG + CRT)  │
-                      └───────────────┘
+                ┌─────────────────────────────────┐
+                │       ORCHESTRATION LAYER        │
+                │   Claude Code + oh-my-claudecode │
+                │      (32 engineering agents)     │
+                └──────────┬──────────────────────┘
+                           │
+      ┌────────────────────┼────────────────────┐
+      │                    │                    │
+┌─────▼─────┐      ┌──────▼──────┐     ┌──────▼──────┐
+│  CONTENT   │      │   VISUAL    │     │   AUDIO     │
+│   LANE     │      │    LANE     │     │    LANE     │
+├────────────┤      ├─────────────┤     ├─────────────┤
+│ Content    │      │ Image       │     │ Music       │
+│ Strategist │      │ Architect   │     │ Producer    │
+│            │      │             │     │             │
+│            │      │ Video       │     │             │
+│            │      │ Director    │     │             │
+└────────────┘      └─────────────┘     └─────────────┘
 ```
 
 ## Agents
 
 | Agent | Domain | What It Does |
 |-------|--------|-------------|
-| **Consulting Forensic** | Intelligence | PE-grade competitive teardowns with funding reality checks |
-| **Pitch Architect** | Presentations | Investor decks, enterprise sales decks, luxury brand presentations |
 | **Content Strategist** | Writing | X threads, LinkedIn posts, long-form — zero AI slop |
 | **Image Architect** | Visual | Production-ready prompts for Nano Banana Pro, Higgsfield, Seedream |
 | **Video Director** | Motion | Hyper-realistic short-form video prompts for Kling, Sora, Veo |
 | **Music Producer** | Audio | Suno prompt engineering across 40+ genres and 10 Indian languages |
-| **Trading Analyst** | Finance | MNQ futures analysis using IFVG Turtle Soup + numerology filtering |
 
-## Workflows
+Additional proprietary agents (consulting, research, trading) are maintained privately for enterprise client work.
 
-### Forensic Teardown
-```
-consulting-forensic → pitch-architect → content-strategist
-```
-Input: Company name. Output: Full competitive intelligence report + presentation deck + social content.
+## Workflow
 
 ### Content Pipeline
 ```
 content-strategist → image-architect → video-director
 ```
 Input: Topic or idea. Output: Thread copy + image prompts + video prompts. Ready to publish.
-
-### Product Launch
-```
-consulting-forensic → pitch-architect → content-strategist → image-architect → video-director
-```
-Input: Product concept. Output: Market analysis + pitch deck + launch content + visual assets.
 
 ## Model Routing
 
@@ -96,7 +72,7 @@ See [`configs/model-routing.md`](configs/model-routing.md) for the full decision
 
 ```bash
 # Clone this repo
-git clone https://github.com/Tashi/ai-engineering-stack.git
+git clone https://github.com/tashisleepy/ai-engineering-stack.git
 
 # Copy agents to your Claude Code config
 cp ai-engineering-stack/agents/*.md ~/.claude/agents/
@@ -106,38 +82,17 @@ npm i -g oh-my-claude-sisyphus@latest
 omc setup
 ```
 
-### Quick Start
-
-```bash
-# In Claude Code — agents are available immediately
-# Use any agent by name in your prompts
-
-# Forensic teardown
-"Use consulting-forensic to tear down [Company X]"
-
-# Content creation
-"Use content-strategist to write a thread about [topic]"
-
-# Full workflow
-"Run the product-launch workflow for [product]"
-```
-
 ## Project Structure
 
 ```
 ai-engineering-stack/
 ├── agents/                    # Specialized AI agent definitions
-│   ├── consulting-forensic.md # PE-grade competitive intelligence
-│   ├── pitch-architect.md     # Investor and enterprise decks
 │   ├── content-strategist.md  # Zero-slop content creation
 │   ├── image-architect.md     # AI image prompt engineering
 │   ├── video-director.md      # AI video prompt engineering
-│   ├── music-producer.md      # AI music production (Suno)
-│   └── trading-analyst.md     # MNQ futures (IFVG + CRT)
+│   └── music-producer.md      # AI music production (Suno)
 ├── workflows/                 # Multi-agent orchestration pipelines
-│   ├── forensic-teardown.md   # Research → Deck → Content
-│   ├── content-pipeline.md    # Write → Image → Video
-│   └── product-launch.md      # Full launch sequence
+│   └── content-pipeline.md    # Write → Image → Video
 ├── configs/                   # System configuration
 │   ├── model-routing.md       # AI model selection matrix
 │   └── tool-ecosystem.md      # Complete tool stack
@@ -146,9 +101,9 @@ ai-engineering-stack/
 
 ## Philosophy
 
-**Production-ready over academic.** Every agent in this stack was built to ship work that enterprise clients pay for. Not prototypes. Not demos. Deployed systems.
+**Production-ready over academic.** Every agent ships work that enterprise clients pay for. Not prototypes. Not demos. Deployed systems.
 
-**Stakes, specifics, friction.** Content must answer "why should anyone care?", name real numbers, and have edges. This principle runs through every agent.
+**Stakes, specifics, friction.** Content must answer "why should anyone care?", name real numbers, and have edges. This runs through every agent.
 
 **Architecture first, then detail.** Start with structure. Fill content. Iterate aggressively until it's 10/10.
 
@@ -157,7 +112,6 @@ ai-engineering-stack/
 - [Claude Code](https://claude.ai/code) — Primary AI engineering environment
 - [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) — Multi-agent orchestration (32 agents)
 - [Ollama](https://ollama.com) + Qwen 3.5 — Local LLM for offline coding
-- [python-pptx](https://python-pptx.readthedocs.io) — Presentation automation
 - [Instrumenta](https://github.com/iappyx/Instrumenta) — McKinsey-grade PowerPoint toolbar
 
 ## License
@@ -166,4 +120,4 @@ MIT
 
 ---
 
-*Built by Tashi. Deployed on $10M+ enterprise AI projects.*
+*Built by Tashi. Part of a larger system deployed on enterprise AI projects.*
